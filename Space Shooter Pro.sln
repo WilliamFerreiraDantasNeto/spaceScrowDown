@@ -91,6 +91,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Sysroot.Linux_x86_64"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VisualScripting.Shared.Editor", "Unity.VisualScripting.Shared.Editor.csproj", "{4A391BB0-6ABF-B237-F74C-A3133F52D6B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meryel.CodeAssist.Editor", "Meryel.CodeAssist.Editor.csproj", "{C95070E4-9911-D99B-C381-1A584EEAB55D}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.Player.csproj", "{EBB4B721-BEFF-8ADC-6B87-01A013D9D18D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine.TestRunner", "UnityEngine.TestRunner.Player.csproj", "{E565B4E3-A552-CCB4-0FA6-A0A58689B9DB}"
@@ -317,6 +319,10 @@ Global
 		{4A391BB0-6ABF-B237-F74C-A3133F52D6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A391BB0-6ABF-B237-F74C-A3133F52D6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A391BB0-6ABF-B237-F74C-A3133F52D6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C95070E4-9911-D99B-C381-1A584EEAB55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C95070E4-9911-D99B-C381-1A584EEAB55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C95070E4-9911-D99B-C381-1A584EEAB55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C95070E4-9911-D99B-C381-1A584EEAB55D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBB4B721-BEFF-8ADC-6B87-01A013D9D18D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EBB4B721-BEFF-8ADC-6B87-01A013D9D18D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBB4B721-BEFF-8ADC-6B87-01A013D9D18D}.Release|Any CPU.ActiveCfg = Release|Any CPU
