@@ -22,10 +22,8 @@ public class Player : MonoBehaviour
     private bool _isShieldtActive = false;
     [SerializeField]
     private GameObject _shieldVisualizer;
-
-    [SerializeField]
+        [SerializeField]
     private int _score = 0;
-
     private UIManager _uiManager;
 
 
@@ -153,6 +151,3 @@ public class Player : MonoBehaviour
         _uiManager.UpdateScore(_score);
     }
 }
-
-// methot to add 10 to the score!
-//Comunitcate whit UI to update the score
