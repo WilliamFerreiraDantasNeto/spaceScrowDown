@@ -22,9 +22,11 @@ public class Player : MonoBehaviour
     private bool _isShieldtActive = false;
     [SerializeField]
     private GameObject _shieldVisualizer;
-        [SerializeField]
+    [SerializeField]
     private int _score = 0;
     private UIManager _uiManager;
+    [SerializeField]
+    private GameObject _LeftEngine, _rightEngine;
 
 
     // Start is called before the first frame update
@@ -106,7 +108,16 @@ public class Player : MonoBehaviour
 
         _uiManager.UpdateLives(_lives);
 
-        if (_lives < 1)
+        if (_lives == 2)
+        {
+            _LeftEngine.SetActive(true);
+        }
+        else if (_lives == 1)
+        {
+            _rightEngine.SetActive(true);
+        }
+
+        else if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);

@@ -134,25 +134,43 @@ namespace Meryel.UnityCodeAssist.Editor
                         return obj;
                 }
             }
-            
-            
+
+
 
             //**--rest can be slow, try avoiding them, make own db etc
             //**--can add a stop-wacher and add warning if slow as well
             //**--can also cache the result
 
 
-            // Object.FindObjectOfType will not return Assets (meshes, textures, prefabs, ...) or inactive objects
-            obj = UnityEngine.Object.FindObjectOfType(type);
+            try
+            {
+                // Object.FindObjectOfType will not return Assets (meshes, textures, prefabs, ...) or inactive objects
+                obj = UnityEngine.Object.FindObjectOfType(type);
+            }
+            catch (Exception ex)
+            {
+                var isMonoBehaviour = type?.IsSubclassOf(typeof(MonoBehaviour));
+                var isScriptableObject = type?.IsSubclassOf(typeof(ScriptableObject));
+                Serilog.Log.Warning(ex, "FindObjectOfType failed for {Type}, mb:{isMB}, so:{isSO}", type?.ToString(), isMonoBehaviour, isScriptableObject);
+            }
 
             obj = getObjectToSend(obj, type);
             if (obj != null)
                 return obj;
-            
 
-            // This function can return any type of Unity object that is loaded, including game objects, prefabs, materials, meshes, textures, etc.
-            // Contrary to Object.FindObjectsOfType this function will also list disabled objects.
-            var arr = Resources.FindObjectsOfTypeAll(type);
+            UnityEngine.Object[] arr = null;
+            try
+            {
+                // This function can return any type of Unity object that is loaded, including game objects, prefabs, materials, meshes, textures, etc.
+                // Contrary to Object.FindObjectsOfType this function will also list disabled objects.
+                arr = Resources.FindObjectsOfTypeAll(type);
+            }
+            catch (Exception ex)
+            {
+                var isMonoBehaviour = type?.IsSubclassOf(typeof(MonoBehaviour));
+                var isScriptableObject = type?.IsSubclassOf(typeof(ScriptableObject));
+                Serilog.Log.Warning(ex, "FindObjectsOfTypeAll failed for {Type}, mb:{isMB}, so:{isSO}", type?.ToString(), isMonoBehaviour, isScriptableObject);
+            }
 
             if (arr != null)
             {

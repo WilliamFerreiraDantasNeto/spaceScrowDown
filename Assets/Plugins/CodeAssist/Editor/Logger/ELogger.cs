@@ -125,13 +125,11 @@ namespace Meryel.UnityCodeAssist.Editor.Logger
                 , rollOnEachProcessRun: isFirst
                 );
 
-            if (_outputWindowSink == null)
-                _outputWindowSink = outputWindowSink.Value;
+            _outputWindowSink ??= outputWindowSink.Value;
             if (_outputWindowSink != null)
                 config = config.WriteTo.Sink(_outputWindowSink, outputWindowMinLevel, outputWindowLevelSwitch);
 
-            if (_memorySink == null)
-                _memorySink = new MemorySink(outputTemplate);
+            _memorySink ??= new MemorySink(outputTemplate);
             config = config.WriteTo.Sink(_memorySink, fileMinLevel, null);
 
             Serilog.Log.Logger = config.CreateLogger();

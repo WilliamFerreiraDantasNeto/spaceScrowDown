@@ -8,11 +8,28 @@ public class Enemy : MonoBehaviour
     private float _speed = 4.0f;
 
     private Player _player;
+    private Animator _anim;
+    // hadle to animator component
 
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        if (_player == null)
+        {
+            Debug.LogError("The Player is NULL");
+        }
+
+        _anim = GetComponent<Animator>();
+
+        if (_anim == null)
+        {
+            Debug.LogError("The animator is NULL");
+        }
+
+        
+        // null check player
+        //assign the component to anim
     }
     // Update is called once per frame
     void Update()
@@ -27,7 +44,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-       
+        
         if (other.tag == "Player")
         {
             Player player = other.transform.GetComponent<Player>();
@@ -35,7 +52,9 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            Destroy(this.gameObject);
+            _anim.SetTrigger("OnEnemyDeath");
+            _speed = 0;
+            Destroy(this.gameObject, 2.0f);
         }
         if (other.tag == "Laser")
         {
@@ -45,8 +64,9 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore(10);
             }
-
-            Destroy(this.gameObject);
+            _anim.SetTrigger("OnEnemyDeath");
+            _speed = 0;
+            Destroy(this.gameObject, 2.0f);
         }
     }
 }

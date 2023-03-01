@@ -63,7 +63,7 @@ namespace Meryel.UnityCodeAssist.Editor.EditorCoroutines
 
             public bool MoveNext(IEnumerator enumerator)
             {
-                bool advance = false;
+                bool advance;// = false;
                 switch (data.type)
                 {
                     case DataType.WaitForSeconds:
@@ -80,9 +80,9 @@ namespace Meryel.UnityCodeAssist.Editor.EditorCoroutines
                         break;
                 }
 
-                if(advance)
+                if (advance)
                 {
-                    data = default(ProcessorData); 
+                    data = default(ProcessorData);
                     return enumerator.MoveNext();
                 }
                 return true;

@@ -522,12 +522,13 @@ namespace Meryel.UnityCodeAssist.Editor
             SendAux(dataOfAe);
         }
 
-        public void SendErrorReport(string errorMessage, string stack)
+        public void SendErrorReport(string errorMessage, string stack, string type)
         {
             var dataOfER = new Synchronizer.Model.ErrorReport()
             {
                 ErrorMessage = errorMessage,
-                ErrorStack = stack
+                ErrorStack = stack,
+                ErrorType = type,
             };
             SendAux(dataOfER);
         }

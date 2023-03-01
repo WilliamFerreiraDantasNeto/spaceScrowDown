@@ -178,13 +178,16 @@ namespace Meryel.UnityCodeAssist.Editor
 
         private static void Application_logMessageReceived(string condition, string stackTrace, LogType type)
         {
-            if (type != LogType.Exception)
+            //if (type != LogType.Exception)
+            if (type != LogType.Exception && type != LogType.Error && type != LogType.Warning)
                 return;
 
             if (!stackTrace.Contains("Meryel.UnityCodeAssist.Editor"))
                 return;
 
-            NetMQInitializer.Publisher?.SendErrorReport(condition, stackTrace);
+            var typeStr = type.ToString();
+
+            NetMQInitializer.Publisher?.SendErrorReport(condition, stackTrace, typeStr);
         }
 
     }
