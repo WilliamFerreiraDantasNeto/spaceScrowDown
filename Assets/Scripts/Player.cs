@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _LeftEngine, _rightEngine;
 
+    [SerializeField]
+    private AudioClip _laserSoundClip;
+    [SerializeField]
+    private AudioSource _audioSource;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +40,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
 
         if (_spawnManager == null)
         {
@@ -44,6 +50,14 @@ public class Player : MonoBehaviour
         if (_uiManager == null)
         {
             Debug.LogError("The UI is NULL");
+        }
+        if (_audioSource == null)
+        {
+            Debug.LogError("AudioSource on the player is NULL");
+        }
+        else
+        {
+            _audioSource.clip = _laserSoundClip;
         }
     }
 
@@ -65,8 +79,15 @@ public class Player : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
+        if (_isSpeedBoostActive)
+        {
+            transform.Translate(direction * _speed * _speedMultiplier * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(direction * _speed * Time.deltaTime);
+        }
         
-        transform.Translate(direction * _speed * Time.deltaTime);
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
@@ -83,6 +104,7 @@ public class Player : MonoBehaviour
     void FireLaser()
     {
         _canFire = Time.time + _fireRate;
+
         if (_isTripleShotActive)
         {
             Instantiate(_tripleLaserPrefab, transform.position + new Vector3(-0.19f, 0.2f, 0), Quaternion.identity);
@@ -92,7 +114,7 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
 
         }
-
+        _audioSource.Play();
     }
 
     public void Damage()
@@ -121,6 +143,7 @@ public class Player : MonoBehaviour
         {
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
+
         }
     }
 
@@ -139,14 +162,12 @@ public class Player : MonoBehaviour
     public void SpeedBoostActive()
     {
         _isSpeedBoostActive = true;
-        _speed *= _speedMultiplier;
         StartCoroutine(SpeedBoostPowerDownRoutine());
     }
 
     IEnumerator SpeedBoostPowerDownRoutine()
     {
         yield return new WaitForSeconds(5.0f);
-        _speed /= _speedMultiplier;
         _isSpeedBoostActive = false; 
     }
 
