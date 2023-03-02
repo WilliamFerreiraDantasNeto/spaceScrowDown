@@ -818,9 +818,9 @@
       <Project>{7B6A31A1-6701-6606-ED8C-11171480F25A}</Project>
       <Name>Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
-      <Project>{ADDE97ED-E140-6266-C646-6B577D86A941}</Project>
-      <Name>Unity.VisualScripting.Flow</Name>
+    <ProjectReference Include="Unity.Postprocessing.Editor.csproj">
+      <Project>{F122F510-5C24-DD7E-C6FF-268F8BFEF44D}</Project>
+      <Name>Unity.Postprocessing.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{F9812B8A-2478-586E-6863-7118CCD973DA}</Project>
@@ -833,6 +833,10 @@
     <ProjectReference Include="Unity.Rider.Editor.csproj">
       <Project>{0003A395-7152-4995-E04F-A0170C53D941}</Project>
       <Name>Unity.Rider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
+      <Project>{ADDE97ED-E140-6266-C646-6B577D86A941}</Project>
+      <Name>Unity.VisualScripting.Flow</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{5272EAC2-1606-D1D2-4438-249D2DAAE868}</Project>
@@ -853,6 +857,10 @@
     <ProjectReference Include="Unity.Services.Core.Analytics.csproj">
       <Project>{6D14861B-8C0C-4804-E502-C3DC0F93D7F6}</Project>
       <Name>Unity.Services.Core.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
+      <Project>{55063C47-F229-15DC-0321-6738BA1DF3E3}</Project>
+      <Name>Unity.Postprocessing.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
       <Project>{4A391BB0-6ABF-B237-F74C-A3133F52D6B0}</Project>
@@ -881,14 +889,6 @@
     <ProjectReference Include="Unity.SysrootPackage.Editor.csproj">
       <Project>{E2CE72DE-0285-4A1B-B4CD-246F5C1B26BE}</Project>
       <Name>Unity.SysrootPackage.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Postprocessing.Editor.csproj">
-      <Project>{F122F510-5C24-DD7E-C6FF-268F8BFEF44D}</Project>
-      <Name>Unity.Postprocessing.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
-      <Project>{55063C47-F229-15DC-0321-6738BA1DF3E3}</Project>
-      <Name>Unity.Postprocessing.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

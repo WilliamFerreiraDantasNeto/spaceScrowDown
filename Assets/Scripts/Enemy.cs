@@ -54,9 +54,14 @@ public class Enemy : MonoBehaviour
                 player.Damage();
             }
             _anim.SetTrigger("OnEnemyDeath");
-            _speed = 0;
+            if (transform.position.y < -7f)
+            {
+                _speed = 0;
+            }
             _audioSource.Play();
+            GetComponent<Collider2D>().enabled = false;
             Destroy(this.gameObject, 2.0f);
+
         }
         if (other.tag == "Laser")
         {
@@ -67,8 +72,13 @@ public class Enemy : MonoBehaviour
                 _player.AddScore(10);
             }
             _anim.SetTrigger("OnEnemyDeath");
-            _speed = 0;
+            if (transform.position.y < -7f)
+            {
+                _speed = 0;
+            }
             _audioSource.Play();
+
+            GetComponent<Collider2D>().enabled = false;
             Destroy(this.gameObject, 2.0f);
         }
     }

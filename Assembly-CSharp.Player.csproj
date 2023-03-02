@@ -731,6 +731,10 @@
       <Project>{3C00A75F-A2D2-B958-C0D2-46AF84245DBD}</Project>
       <Name>Unity.Services.Core.Analytics.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Postprocessing.Runtime.Player.csproj">
+      <Project>{3ED34A63-91C3-DDCB-93A0-B5DF493CF4A7}</Project>
+      <Name>Unity.Postprocessing.Runtime.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Environments.Player.csproj">
       <Project>{B2633CB1-82A5-3D5E-B134-7D2DE4BBDD94}</Project>
       <Name>Unity.Services.Core.Environments.Player</Name>
@@ -738,10 +742,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.Player.csproj">
       <Project>{77E5DDC2-F9D7-784A-6568-D1AE0DCBA95E}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Postprocessing.Runtime.Player.csproj">
-      <Project>{3ED34A63-91C3-DDCB-93A0-B5DF493CF4A7}</Project>
-      <Name>Unity.Postprocessing.Runtime.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
