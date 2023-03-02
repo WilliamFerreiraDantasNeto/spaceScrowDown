@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     private AudioClip _laserSoundClip;
     [SerializeField]
     private AudioSource _audioSource;
+    private Animator _anim;
 
 
     // Start is called before the first frame update
@@ -41,6 +42,12 @@ public class Player : MonoBehaviour
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        _anim = GetComponent<Animator>();
+
+        if (_anim == null)
+        {
+            Debug.LogError("The animator is NULL");
+        }
 
         if (_spawnManager == null)
         {
@@ -75,6 +82,20 @@ public class Player : MonoBehaviour
     void CauculateMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
+        if (horizontalInput > 0)
+        {
+            _anim.SetBool("Turn_left", true);
+            
+        }
+        else if (horizontalInput == 0)
+        {
+            _anim.SetBool("Turn_left", false);
+            _anim.SetBool("Turn_right", false);
+        }
+        else if (horizontalInput < 0){
+            _anim.SetBool("Turn_right", true);
+        }
+
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
