@@ -21,7 +21,7 @@ public class Asteroid : MonoBehaviour
         transform.Rotate(Vector3.forward * _rotateSpeed * Time.deltaTime);
         //rotate object on the z axis speed 3
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Laser")
         {

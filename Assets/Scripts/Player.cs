@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -34,6 +36,23 @@ public class Player : MonoBehaviour
     private AudioSource _audioSource;
     private Animator _anim;
 
+    private CharacterController controller;
+    
+    private PlayerControl playerControl;
+    private void Awake()
+    {
+        playerControl = new PlayerControl();
+    }
+
+    private void OnEnable()
+    {
+        controller = GetComponent<CharacterController>();
+        playerControl.Enable();
+    }
+    private void OnDisable()
+    {
+        playerControl.Disable();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +92,7 @@ public class Player : MonoBehaviour
     {
         CauculateMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if (playerControl.PlayerMain.Fire.triggered && Time.time > _canFire)
         {
             FireLaser();
         }
@@ -81,34 +100,32 @@ public class Player : MonoBehaviour
 
     void CauculateMovement()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        if (horizontalInput > 0)
+        Vector2 movementInput = playerControl.PlayerMain.Move.ReadValue<Vector2>();
+        Vector3 move = new Vector3(movementInput.x, movementInput.y, 0f);
+        
+
+        if (_isSpeedBoostActive)
+        {
+            controller.Move(move * Time.deltaTime * _speed * _speedMultiplier);
+        }
+        else
+        {
+            controller.Move(move * Time.deltaTime * _speed);
+        }
+        if (movementInput.x > 0)
         {
             _anim.SetBool("Turn_left", true);
-            
+
         }
-        else if (horizontalInput == 0)
+        else if (movementInput.x == 0)
         {
             _anim.SetBool("Turn_left", false);
             _anim.SetBool("Turn_right", false);
         }
-        else if (horizontalInput < 0){
+        else if (movementInput.x < 0)
+        {
             _anim.SetBool("Turn_right", true);
         }
-
-        float verticalInput = Input.GetAxis("Vertical");
-
-        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
-
-        if (_isSpeedBoostActive)
-        {
-            transform.Translate(direction * _speed * _speedMultiplier * Time.deltaTime);
-        }
-        else
-        {
-            transform.Translate(direction * _speed * Time.deltaTime);
-        }
-        
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 

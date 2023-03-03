@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector3(randomx, 8f, 0);
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         
         if (other.tag == "Player")
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
                 _speed = 0;
             }
             _audioSource.Play();
-            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Collider>().enabled = false;
             Destroy(this.gameObject, 2.0f);
 
         }
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
             }
             _audioSource.Play();
 
-            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Collider>().enabled = false;
             Destroy(this.gameObject, 2.0f);
         }
     }
