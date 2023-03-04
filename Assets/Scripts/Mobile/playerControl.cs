@@ -44,6 +44,24 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f2bbff6-04a2-4f60-99e6-dbaad664f25c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quilt"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f571fe6-90a1-4ab2-9050-04b2ff2aa065"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -189,6 +207,39 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32398c02-7adf-4d1c-9346-905ec91ba47b"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""074f8225-ee95-418a-a0f2-13408a29000d"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ed89702-55c4-443c-b288-c511c132e02d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quilt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,6 +250,8 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_PlayerMain = asset.FindActionMap("PlayerMain", throwIfNotFound: true);
         m_PlayerMain_Move = m_PlayerMain.FindAction("Move", throwIfNotFound: true);
         m_PlayerMain_Fire = m_PlayerMain.FindAction("Fire", throwIfNotFound: true);
+        m_PlayerMain_Restart = m_PlayerMain.FindAction("Restart", throwIfNotFound: true);
+        m_PlayerMain_Quilt = m_PlayerMain.FindAction("Quilt", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,12 +315,16 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private List<IPlayerMainActions> m_PlayerMainActionsCallbackInterfaces = new List<IPlayerMainActions>();
     private readonly InputAction m_PlayerMain_Move;
     private readonly InputAction m_PlayerMain_Fire;
+    private readonly InputAction m_PlayerMain_Restart;
+    private readonly InputAction m_PlayerMain_Quilt;
     public struct PlayerMainActions
     {
         private @PlayerControl m_Wrapper;
         public PlayerMainActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerMain_Move;
         public InputAction @Fire => m_Wrapper.m_PlayerMain_Fire;
+        public InputAction @Restart => m_Wrapper.m_PlayerMain_Restart;
+        public InputAction @Quilt => m_Wrapper.m_PlayerMain_Quilt;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMain; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +340,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
+            @Quilt.started += instance.OnQuilt;
+            @Quilt.performed += instance.OnQuilt;
+            @Quilt.canceled += instance.OnQuilt;
         }
 
         private void UnregisterCallbacks(IPlayerMainActions instance)
@@ -293,6 +356,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
+            @Quilt.started -= instance.OnQuilt;
+            @Quilt.performed -= instance.OnQuilt;
+            @Quilt.canceled -= instance.OnQuilt;
         }
 
         public void RemoveCallbacks(IPlayerMainActions instance)
@@ -314,5 +383,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
+        void OnQuilt(InputAction.CallbackContext context);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -9,6 +10,11 @@ public class Enemy : MonoBehaviour
     private Player _player;
     private Animator _anim;
     private AudioSource _audioSource;
+    [SerializeField]
+    private GameObject _laserPrefab;
+    private float _fireRate = 3.0f;
+    private float _canFire = -1f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +33,24 @@ public class Enemy : MonoBehaviour
             Debug.LogError("The animator is NULL");
         }
 
-        
+
         // null check player
         //assign the component to anim
     }
     // Update is called once per frame
     void Update()
+    {
+        CalculateMovement();
+        if (Time.time > _canFire)
+        {
+            _fireRate = Random.Range(3f, 7f);
+            _canFire = Time.time + _fireRate;
+            Instantiate(_laserPrefab, transform.position,Quaternion.identity);
+        }
+
+    }
+
+    void CalculateMovement()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
@@ -44,8 +62,8 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.tag == "Player")
+
+        if (other.tag == "Player" )
         {
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
@@ -62,7 +80,7 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject, 2.0f);
 
         }
-        if (other.tag == "Laser")
+        if (other.tag == "Laser" || other.tag == "EnemyLaser")
         {
             Destroy(other.gameObject);
 
@@ -78,7 +96,9 @@ public class Enemy : MonoBehaviour
             _audioSource.Play();
 
             GetComponent<Collider>().enabled = false;
+            _canFire = -10;
             Destroy(this.gameObject, 2.0f);
         }
     }
 }
+    

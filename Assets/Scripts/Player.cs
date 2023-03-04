@@ -103,7 +103,6 @@ public class Player : MonoBehaviour
         Vector2 movementInput = playerControl.PlayerMain.Move.ReadValue<Vector2>();
         Vector3 move = new Vector3(movementInput.x, movementInput.y, 0f);
         
-
         if (_isSpeedBoostActive)
         {
             controller.Move(move * Time.deltaTime * _speed * _speedMultiplier);
@@ -183,6 +182,8 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
 
         }
+        GetComponent<Collider>().enabled = false;
+        ColiderRoutine();
     }
 
     public void TripleShotActive()
@@ -195,6 +196,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
+    }
+    IEnumerator ColiderRoutine()
+    {
+        yield return new WaitForSeconds(1.0f);
+        GetComponent<Collider>().enabled = true;
     }
 
     public void SpeedBoostActive()
