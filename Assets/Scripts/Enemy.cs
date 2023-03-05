@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _speed = 4.0f;
     private Player _player;
+    private Player _player2;
     private Animator _anim;
     private AudioSource _audioSource;
     [SerializeField]
@@ -15,15 +16,18 @@ public class Enemy : MonoBehaviour
     private float _fireRate = 3.0f;
     private float _canFire = -1f;
 
+    private GameManager _gameManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _gameManager = GameObject   .Find("Game_Manager").GetComponent<GameManager>();
         _audioSource = GetComponent<AudioSource>();
-        if (_player == null)
+        if (_gameManager.isCoopMod)
         {
-            Debug.LogError("The Player is NULL");
+            _player2 = GameObject.Find("Player2").GetComponent<Player>();
         }
 
         _anim = GetComponent<Animator>();
@@ -33,9 +37,6 @@ public class Enemy : MonoBehaviour
             Debug.LogError("The animator is NULL");
         }
 
-
-        // null check player
-        //assign the component to anim
     }
     // Update is called once per frame
     void Update()

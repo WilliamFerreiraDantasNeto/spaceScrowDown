@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool _isGameOver;
     private PlayerControl playerControl;
+    [SerializeField]
+    public bool isCoopMod = false;
     private void Awake()
     {
         playerControl = new PlayerControl();

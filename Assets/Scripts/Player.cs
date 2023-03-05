@@ -35,10 +35,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioSource _audioSource;
     private Animator _anim;
-
     private CharacterController controller;
-    
     private PlayerControl playerControl;
+    private GameManager _gameManager;
+    [SerializeField]
+    private bool _isPlayerTwo = false;
     private void Awake()
     {
         playerControl = new PlayerControl();
@@ -57,11 +58,17 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+       
+        
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
         _anim = GetComponent<Animator>();
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        if (_gameManager.isCoopMod == false)
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
 
         if (_anim == null)
         {
@@ -91,16 +98,30 @@ public class Player : MonoBehaviour
     void Update()
     {
         CauculateMovement();
-
-        if (playerControl.PlayerMain.Fire.triggered && Time.time > _canFire)
+        if (_isPlayerTwo)
         {
-            FireLaser();
+            if (playerControl.PlayerTwo.Fire.triggered && Time.time > _canFire)
+            {
+                FireLaser();
+            }
+        }
+        else
+        {
+            if (playerControl.PlayerMain.Fire.triggered && Time.time > _canFire)
+            {
+                FireLaser();
+            }
+
         }
     }
-
     void CauculateMovement()
     {
         Vector2 movementInput = playerControl.PlayerMain.Move.ReadValue<Vector2>();
+        if (_isPlayerTwo)
+        {
+            movementInput = playerControl.PlayerTwo.Move.ReadValue<Vector2>();
+        }
+            
         Vector3 move = new Vector3(movementInput.x, movementInput.y, 0f);
         
         if (_isSpeedBoostActive)
