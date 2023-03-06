@@ -10,9 +10,15 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyContainer;
     [SerializeField]
     private GameObject[] powerups;
-
+    private bool _player1Death = false, _player2Death = false;
     private bool _stopSpawning = false;
-        public void StartSpawning()
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+    }
+    public void StartSpawning()
     {
         StartCoroutine(SpawEnemyRoutine());
         StartCoroutine(SpawPowerupRoutine());
@@ -42,8 +48,32 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void OnPlayerDeath()
+    public void OnPlayerDeath(int player)
     {
-        _stopSpawning = true;
+        if (player == 1)
+        {
+            _player1Death = true;
+        }
+        else if (player == 2)
+        {
+            _player2Death = true;
+        }
+        CoopPlayersDeath();
+
+    }
+    public void CoopPlayersDeath()
+    {
+        if (_gameManager.isCoopMod)
+        {
+            if (_player1Death && _player2Death)
+            {
+                _stopSpawning = true;
+            }
+        }
+        else
+        {
+            _stopSpawning = true;
+        }
+        
     }
 }

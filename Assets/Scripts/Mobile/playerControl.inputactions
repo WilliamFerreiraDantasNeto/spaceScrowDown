@@ -33,9 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Quilt",
+                    "name": "Pause",
                     "type": "Button",
-                    "id": "4f571fe6-90a1-4ab2-9050-04b2ff2aa065",
+                    "id": "4e07c1c2-264f-435f-9b13-1a0c3b2b698f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -155,12 +155,12 @@
                 },
                 {
                     "name": "",
-                    "id": "9ed89702-55c4-443c-b288-c511c132e02d",
-                    "path": "<Keyboard>/escape",
+                    "id": "f59b37be-0b36-432b-a809-92feacd92bbf",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Quilt",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

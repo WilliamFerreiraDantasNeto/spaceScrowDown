@@ -55,9 +55,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Quilt"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
-                    ""id"": ""4f571fe6-90a1-4ab2-9050-04b2ff2aa065"",
+                    ""id"": ""4e07c1c2-264f-435f-9b13-1a0c3b2b698f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -177,12 +177,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9ed89702-55c4-443c-b288-c511c132e02d"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""f59b37be-0b36-432b-a809-92feacd92bbf"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Quilt"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -288,7 +288,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_PlayerMain_Move = m_PlayerMain.FindAction("Move", throwIfNotFound: true);
         m_PlayerMain_Fire = m_PlayerMain.FindAction("Fire", throwIfNotFound: true);
         m_PlayerMain_Restart = m_PlayerMain.FindAction("Restart", throwIfNotFound: true);
-        m_PlayerMain_Quilt = m_PlayerMain.FindAction("Quilt", throwIfNotFound: true);
+        m_PlayerMain_Pause = m_PlayerMain.FindAction("Pause", throwIfNotFound: true);
         // PlayerTwo
         m_PlayerTwo = asset.FindActionMap("PlayerTwo", throwIfNotFound: true);
         m_PlayerTwo_Move = m_PlayerTwo.FindAction("Move", throwIfNotFound: true);
@@ -357,7 +357,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMain_Move;
     private readonly InputAction m_PlayerMain_Fire;
     private readonly InputAction m_PlayerMain_Restart;
-    private readonly InputAction m_PlayerMain_Quilt;
+    private readonly InputAction m_PlayerMain_Pause;
     public struct PlayerMainActions
     {
         private @PlayerControl m_Wrapper;
@@ -365,7 +365,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerMain_Move;
         public InputAction @Fire => m_Wrapper.m_PlayerMain_Fire;
         public InputAction @Restart => m_Wrapper.m_PlayerMain_Restart;
-        public InputAction @Quilt => m_Wrapper.m_PlayerMain_Quilt;
+        public InputAction @Pause => m_Wrapper.m_PlayerMain_Pause;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMain; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -384,9 +384,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
-            @Quilt.started += instance.OnQuilt;
-            @Quilt.performed += instance.OnQuilt;
-            @Quilt.canceled += instance.OnQuilt;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerMainActions instance)
@@ -400,9 +400,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
-            @Quilt.started -= instance.OnQuilt;
-            @Quilt.performed -= instance.OnQuilt;
-            @Quilt.canceled -= instance.OnQuilt;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerMainActions instance)
@@ -479,7 +479,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
-        void OnQuilt(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IPlayerTwoActions
     {

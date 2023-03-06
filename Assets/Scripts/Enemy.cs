@@ -22,12 +22,19 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
+        
+        if (_player != null)
+        {
+            _player = GameObject.Find("Player").GetComponent<Player>();
+        }
         _gameManager = GameObject   .Find("Game_Manager").GetComponent<GameManager>();
         _audioSource = GetComponent<AudioSource>();
         if (_gameManager.isCoopMod)
         {
-            _player2 = GameObject.Find("Player2").GetComponent<Player>();
+            if (_player2 != null)
+            {
+                _player2 = GameObject.Find("Player2").GetComponent<Player>();
+            }
         }
 
         _anim = GetComponent<Animator>();

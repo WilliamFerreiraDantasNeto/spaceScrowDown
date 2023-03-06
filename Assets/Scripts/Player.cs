@@ -186,8 +186,15 @@ public class Player : MonoBehaviour
 
         _lives--;
 
-        _uiManager.UpdateLives(_lives);
-
+        if (_isPlayerTwo)
+        {
+            _uiManager.UpdateLivesPlayer2(_lives);
+        }
+        else
+        {
+            _uiManager.UpdateLives(_lives);
+        }
+        
         if (_lives == 2)
         {
             _LeftEngine.SetActive(true);
@@ -199,7 +206,15 @@ public class Player : MonoBehaviour
 
         else if (_lives < 1)
         {
-            _spawnManager.OnPlayerDeath();
+            if (_isPlayerTwo)
+            {
+                _spawnManager.OnPlayerDeath(2);
+            }
+            else
+            {
+                _spawnManager.OnPlayerDeath(1);
+            }
+            
             Destroy(this.gameObject);
 
         }

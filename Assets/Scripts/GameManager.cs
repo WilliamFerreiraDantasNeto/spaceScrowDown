@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     private PlayerControl playerControl;
     [SerializeField]
     public bool isCoopMod = false;
+    [SerializeField]
+    private GameObject _pauseMenu;
+
     private void Awake()
     {
         playerControl = new PlayerControl();
@@ -32,17 +35,22 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(1); //Current Game Scene
         }
-        if (playerControl.PlayerMain.Quilt.triggered)
+        if (playerControl.PlayerMain.Pause.triggered)
         {
-            Quilt();
+            if (_pauseMenu != null)
+            {
+                _pauseMenu.SetActive(true);
+            }
+            PauseGame();
         }
+        
     }
     public void GameOver()
     {
         _isGameOver = true;
     }
-    private void Quilt()
+    public void PauseGame()
     {
-        Application.Quit();
+        Time.timeScale = 0;
     }
 }
