@@ -7,8 +7,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4.0f;
-    private Player _player;
-    private Player _player2;
+    [SerializeField]
     private Animator _anim;
     private AudioSource _audioSource;
     [SerializeField]
@@ -22,21 +21,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        if (_player != null)
-        {
-            _player = GameObject.Find("Player").GetComponent<Player>();
-        }
-        _gameManager = GameObject   .Find("Game_Manager").GetComponent<GameManager>();
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         _audioSource = GetComponent<AudioSource>();
-        if (_gameManager.isCoopMod)
-        {
-            if (_player2 != null)
-            {
-                _player2 = GameObject.Find("Player2").GetComponent<Player>();
-            }
-        }
-
         _anim = GetComponent<Animator>();
 
         if (_anim == null)
@@ -79,7 +65,7 @@ public class Enemy : MonoBehaviour
                 player.Damage();
             }
             _anim.SetTrigger("OnEnemyDeath");
-            if (transform.position.y < -7f)
+            if (transform.position.y < -6f)
             {
                 _speed = 0;
             }
@@ -91,13 +77,14 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Laser" || other.tag == "EnemyLaser")
         {
             Destroy(other.gameObject);
-
-            if (_player != null)
+            
+            if (_gameManager != null)
             {
-                _player.AddScore(10);
+                _gameManager.AddScore(10);
             }
+            
             _anim.SetTrigger("OnEnemyDeath");
-            if (transform.position.y < -7f)
+            if (transform.position.y < -6f)
             {
                 _speed = 0;
             }

@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour
     private bool _player1Death = false, _player2Death = false;
     [SerializeField]
     private GameObject _mobile;
+    [SerializeField]
+    private Text _HiscoreText;
+    private int _score, _hiScore = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +38,8 @@ public class UIManager : MonoBehaviour
 #else
         _mobile.SetActive(false);
 #endif
+        _hiScore = PlayerPrefs.GetInt("HiScore", 0);
+        _HiscoreText.text = "Hi-Score: " + _hiScore.ToString();
         _scoreText.text = "Score: " + 0;
         _GameOverText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
@@ -46,7 +51,18 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore(int playerScore)
     {
-        _scoreText.text = "Score: " + playerScore.ToString();
+        _score = playerScore;
+        _scoreText.text = "Score: " + _score.ToString();
+    }
+
+    public void CheckForHiScore()
+    {
+        if (_score > _hiScore)
+        {
+            _hiScore = _score;
+            PlayerPrefs.SetInt("HiScore", _hiScore);
+            _HiscoreText.text = "Hi-Score: " + _score.ToString();
+        }
     }
 
     public void UpdateLives(int currentLives)

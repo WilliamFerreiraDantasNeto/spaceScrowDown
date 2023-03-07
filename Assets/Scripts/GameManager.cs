@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public bool isCoopMod = false;
     [SerializeField]
     private GameObject _pauseMenu;
+    [SerializeField]
+    private UIManager _uiManager;
+    private int _score = 0;
 
     private void Awake()
     {
@@ -33,7 +36,15 @@ public class GameManager : MonoBehaviour
         // restart the current scene
         if (playerControl.PlayerMain.Restart.triggered && _isGameOver == true)
         {
-            SceneManager.LoadScene(1); //Current Game Scene
+            if (isCoopMod)
+            {
+                SceneManager.LoadScene(2); //Current Game Scene
+            }
+            else
+            {
+                SceneManager.LoadScene(1); //Current Game Scene
+            }
+            
         }
         if (playerControl.PlayerMain.Pause.triggered)
         {
@@ -52,5 +63,10 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         Time.timeScale = 0;
+    }
+    public void AddScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
     }
 }

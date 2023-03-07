@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _shieldVisualizer;
     [SerializeField]
-    private int _score = 0;
     private UIManager _uiManager;
     [SerializeField]
     private GameObject _LeftEngine, _rightEngine;
@@ -216,7 +215,7 @@ public class Player : MonoBehaviour
             }
             
             Destroy(this.gameObject);
-
+            _uiManager.CheckForHiScore();
         }
         GetComponent<Collider>().enabled = false;
         ColiderRoutine();
@@ -257,9 +256,5 @@ public class Player : MonoBehaviour
         _shieldVisualizer.SetActive(true);
     }
 
-    public void AddScore(int points)
-    {
-        _score += points;
-        _uiManager.UpdateScore(_score);
-    }
+    
 }
