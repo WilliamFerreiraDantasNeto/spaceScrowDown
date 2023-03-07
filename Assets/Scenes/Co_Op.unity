@@ -562,7 +562,7 @@ MonoBehaviour:
   _fireRate: 0.15
   _lives: 3
   _shieldVisualizer: {fileID: 18793234}
-  _score: 0
+  _uiManager: {fileID: 0}
   _LeftEngine: {fileID: 262474467}
   _rightEngine: {fileID: 2032237328}
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
@@ -785,7 +785,7 @@ MonoBehaviour:
   _fireRate: 0.15
   _lives: 3
   _shieldVisualizer: {fileID: 1163570427}
-  _score: 0
+  _uiManager: {fileID: 0}
   _LeftEngine: {fileID: 883631718}
   _rightEngine: {fileID: 89802716}
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
@@ -1556,6 +1556,86 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc07c768a507d440bcb487daf00813b, type: 3}
+--- !u!1 &570128335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570128338}
+  - component: {fileID: 570128337}
+  - component: {fileID: 570128336}
+  m_Layer: 5
+  m_Name: HiScore_text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &570128336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570128335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8297a2bf97dbbba468bd2518d003a876, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Hi-Score: 0'
+--- !u!222 &570128337
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570128335}
+  m_CullTransparentMesh: 1
+--- !u!224 &570128338
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570128335}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2030609950}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -100, y: -3}
+  m_SizeDelta: {x: 114.5304, y: 30}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &606109860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1695,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2030609950}
     m_Modifications:
+    - target: {fileID: 7195656682132150963, guid: 2716e91aab25ee64b956af85ba70e88c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8741214682433143985, guid: 2716e91aab25ee64b956af85ba70e88c, type: 3}
       propertyPath: m_Name
       value: Pause_menu_panel
@@ -1943,7 +2027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100, y: -3}
   m_SizeDelta: {x: 97.29999, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &945271591
@@ -1967,7 +2051,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 8297a2bf97dbbba468bd2518d003a876, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
@@ -2840,6 +2924,7 @@ MonoBehaviour:
   _isGameOver: 0
   isCoopMod: 1
   _pauseMenu: {fileID: 633959725}
+  _uiManager: {fileID: 2030609951}
 --- !u!1 &1943674765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,6 +3096,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 945271590}
+  - {fileID: 570128338}
   - {fileID: 1943674766}
   - {fileID: 1138303368}
   - {fileID: 1365119796}
@@ -3055,6 +3141,7 @@ MonoBehaviour:
   _player1Death: 0
   _player2Death: 0
   _mobile: {fileID: 72654763}
+  _HiscoreText: {fileID: 570128336}
 --- !u!1 &2032237328
 GameObject:
   m_ObjectHideFlags: 0
